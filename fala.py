@@ -5,6 +5,8 @@ import os
 import subprocess
 import pyglet
 
+_projeto_google_cloud = "silaba-429700"
+
 _gabarito = """
 {
   "input": {
@@ -40,7 +42,7 @@ def texto_para_fala(texto: str):
         headers={
             "Content-Type": "application/json; charset=utf-8",
             "Authorization": f"Bearer {token_acesso_google}",
-            "x-goog-user-project": "silaba-429700",
+            "x-goog-user-project": _projeto_google_cloud,
         },
     )
     conteúdo_resposta = response.json()
