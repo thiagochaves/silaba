@@ -15,7 +15,9 @@ from palavra import (
 )
 
 
-azul = (0, 149, 255, 255)
+cor_letra = (0, 149, 255, 255)
+cor_fundo = (242, 233, 208, 255)
+cor_borda = (0, 0, 204, 30)
 
 
 def main():
@@ -24,12 +26,14 @@ def main():
     @window.event
     def on_draw():
         window.clear()
+        pyglet.gl.glClearColor(*[c / 255 for c in cor_fundo])
         draw_bordered_text(
             palavra(),
             window.width // 2,
             window.height // 2,
-            text_color=azul,
-            border_color=(255, 255, 255, 255),
+            border_size=1,
+            text_color=cor_letra,
+            border_color=cor_borda,
         )
         if mudou():
             fala.falar(palavra())
