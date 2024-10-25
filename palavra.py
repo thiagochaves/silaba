@@ -74,6 +74,7 @@ def adicionar_acentos(palavra):
         "HELOISA": "HELOÍSA",
         "JOSE": "JOSÉ",
         "MAMAE": "MAMÃE",
+        "MAÇA": "MAÇÃ",
         "SAO": "SÃO",
         "NAO": "NÃO",
         "AGUA": "ÁGUA",
@@ -136,6 +137,7 @@ def adicionar_acentos(palavra):
         "INDIO": "ÍNDIO",
         "XICARA": "XÍCARA",
         "PURE": "PURÊ",
+        "IMA": "ÍMÃ",
     }
     if palavra in substituições:
         return substituições[palavra]

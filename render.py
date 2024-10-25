@@ -1,5 +1,7 @@
 import pyglet
 
+_FONTE = "Comic Neue"
+
 
 def draw_bordered_text(
     text,
@@ -12,7 +14,7 @@ def draw_bordered_text(
     # Create the label for the text
     label = pyglet.text.Label(
         text,
-        font_name="Comic Neue",
+        font_name=_FONTE,
         font_size=180,
         x=x,
         y=y,
@@ -36,7 +38,7 @@ def draw_bordered_text(
     for dx, dy in offsets:
         border_label = pyglet.text.Label(
             text,
-            font_name="Comic Neue",
+            font_name=_FONTE,
             font_size=180,
             x=x + dx,
             y=y + dy,
