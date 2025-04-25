@@ -4,50 +4,32 @@ import base64
 import os
 import subprocess
 import pyglet
+from google.cloud import texttospeech
 
-_projeto_google_cloud = "silaba-429700"
 
-_gabarito = """
-{
-  "input": {
-    "text": "%%%"
-  },
-  "voice": {
-    "languageCode": "pt-BR",
-    "name": "pt-BR-Wavenet-D",
-    "ssmlGender": "FEMALE"
-  },
-  "audioConfig": {
-    "audioEncoding": "MP3"
-  }
-}
-"""
+_cliente = texttospeech.TextToSpeechClient()
 
 
 def texto_para_fala(texto: str):
     if os.path.exists(f"mp3/{ texto }.mp3"):
         return f"mp3/{ texto }.mp3"
-    conteúdo_requisição = _gabarito.replace("%%%", texto)
-    url = "https://texttospeech.googleapis.com/v1/text:synthesize"
-    token_acesso_google = (
-        subprocess.run(
-            "gcloud auth print-access-token", shell=True, capture_output=True
-        )
-        .stdout.decode()
-        .strip()
+    input = texttospeech.SynthesisInput(text=texto)
+    voz = texttospeech.VoiceSelectionParams(
+        language_code="pt-BR",
+        ssml_gender=texttospeech.SsmlVoiceGender.FEMALE,
+        name="pt-BR-Wavenet-D",
     )
-    response = httpx.post(
-        url,
-        json=json.loads(conteúdo_requisição),
-        headers={
-            "Content-Type": "application/json; charset=utf-8",
-            "Authorization": f"Bearer {token_acesso_google}",
-            "x-goog-user-project": _projeto_google_cloud,
-        },
+    configuração_áudio = texttospeech.AudioConfig(
+        audio_encoding=texttospeech.AudioEncoding.MP3,
+        pitch=0.0,
+        speaking_rate=1.0,
     )
-    conteúdo_resposta = response.json()
-    conteúdo_áudio = conteúdo_resposta["audioContent"]
-    áudio = base64.b64decode(conteúdo_áudio)
+    resposta = _cliente.synthesize_speech(
+        input=input,
+        voice=voz,
+        audio_config=configuração_áudio,
+    )
+    áudio = resposta.audio_content
     with open(f"mp3/{ texto }.mp3", "wb") as arquivo:
         arquivo.write(áudio)
     return f"mp3/{ texto }.mp3"
