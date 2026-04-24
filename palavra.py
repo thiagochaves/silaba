@@ -138,6 +138,9 @@ def adicionar_acentos(palavra):
         "XICARA": "XÍCARA",
         "PURE": "PURÊ",
         "IMA": "ÍMÃ",
+        "SANSAO": "SANSÃO",
+        "MONICA": "MÔNICA",
+        "CASCAO": "CASCÃO",
     }
     if palavra in substituições:
         return substituições[palavra]
