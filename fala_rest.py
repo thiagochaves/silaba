@@ -6,8 +6,6 @@ import subprocess
 import pyglet
 
 
-_cliente = texttospeech.TextToSpeechClient()
-
 _projeto_google_cloud = "silaba-429700"
 
 _gabarito = """
@@ -21,7 +19,9 @@ _gabarito = """
     "ssmlGender": "FEMALE"
   },
   "audioConfig": {
-    "audioEncoding": "MP3"
+    "audioEncoding": "MP3",
+    "pitch": 0.0,
+    "speakingRate": 1.0
   }
 }
 """
@@ -47,7 +47,9 @@ def texto_para_fala(texto: str):
             "Authorization": f"Bearer {token_acesso_google}",
             "x-goog-user-project": _projeto_google_cloud,
         },
+        timeout=30.0,
     )
+    response.raise_for_status()
     conteúdo_resposta = response.json()
     conteúdo_áudio = conteúdo_resposta["audioContent"]
     áudio = base64.b64decode(conteúdo_áudio)
