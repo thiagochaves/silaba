@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Silaba</title>
+    <style>
+      :root {
+        --cor-fundo: rgb(242, 233, 208);
+        --cor-letra: rgb(0, 149, 255);
+        --cor-borda: rgba(0, 0, 204, 0.15);
+        --cor-card: rgba(255, 255, 255, 0.56);
+        --cor-botao: rgb(0, 88, 191);
+        --cor-botao-secundario: rgb(237, 227, 198);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Comic Neue", "Trebuchet MS", sans-serif;
+        background:
+          radial-gradient(circle at top, rgba(255, 255, 255, 0.75), transparent 40%),
+          linear-gradient(180deg, rgb(248, 241, 219), var(--cor-fundo));
+        color: rgb(36, 54, 92);
+      }
+
+      main {
+        min-height: 100vh;
+        display: grid;
+        grid-template-rows: 1fr auto;
+        padding: 18px;
+        gap: 18px;
+      }
+
+      .visor {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 20px;
+        border-radius: 28px;
+        background: var(--cor-card);
+        box-shadow:
+          0 16px 36px rgba(56, 78, 124, 0.16),
+          inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      }
+
+      #texto {
+        margin: 0;
+        color: var(--cor-letra);
+        font-size: clamp(3.5rem, 16vw, 8rem);
+        line-height: 0.95;
+        letter-spacing: 0.03em;
+        text-shadow:
+          -1px -1px 0 var(--cor-borda),
+          -1px 0 0 var(--cor-borda),
+          -1px 1px 0 var(--cor-borda),
+          0 -1px 0 var(--cor-borda),
+          0 1px 0 var(--cor-borda),
+          1px -1px 0 var(--cor-borda),
+          1px 0 0 var(--cor-borda),
+          1px 1px 0 var(--cor-borda);
+        word-break: break-word;
+      }
+
+      .controles {
+        display: grid;
+        gap: 12px;
+      }
+
+      label {
+        font-size: 0.95rem;
+        font-weight: 700;
+      }
+
+      input {
+        width: 100%;
+        padding: 18px 20px;
+        border: 2px solid rgba(0, 88, 191, 0.18);
+        border-radius: 18px;
+        font-size: 1.35rem;
+        text-transform: uppercase;
+        background: rgba(255, 255, 255, 0.86);
+      }
+
+      input:focus {
+        outline: 3px solid rgba(0, 149, 255, 0.24);
+        border-color: rgba(0, 88, 191, 0.42);
+      }
+
+      .ações {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 10px;
+      }
+
+      button {
+        min-height: 54px;
+        border: 0;
+        border-radius: 16px;
+        font: inherit;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+
+      #ativar-som {
+        color: white;
+        background: linear-gradient(180deg, rgb(0, 119, 255), var(--cor-botao));
+        box-shadow: 0 10px 22px rgba(0, 88, 191, 0.24);
+      }
+
+      .secundário {
+        color: rgb(58, 77, 116);
+        background: var(--cor-botao-secundario);
+      }
+
+      #status {
+        min-height: 1.3em;
+        margin: 0;
+        font-size: 0.95rem;
+        color: rgb(78, 100, 143);
+      }
+
+      @media (max-width: 480px) {
+        .ações {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="visor" aria-live="polite">
+        <h1 id="texto"></h1>
+      </section>
+
+      <section class="controles">
+        <label for="entrada">Digite letras ou números</label>
+        <input
+          id="entrada"
+          type="text"
+          inputmode="text"
+          autocomplete="off"
+          autocorrect="off"
+          autocapitalize="characters"
+          spellcheck="false"
+          maxlength="10"
+        />
+
+        <div class="ações">
+          <button id="ativar-som" type="button">Ativar som</button>
+          <button id="repetir" class="secundário" type="button">Repetir</button>
+          <button id="limpar" class="secundário" type="button">Limpar</button>
+        </div>
+
+        <p id="status">Toque em “Ativar som” para liberar o áudio no celular.</p>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
