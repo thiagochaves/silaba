@@ -5,6 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Silaba</title>
     <style>
+      @font-face {
+        font-family: "Comic Neue";
+        src: url("/static/ComicNeue-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+      }
+
+      @font-face {
+        font-family: "Comic Neue";
+        src: url("/static/ComicNeue-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+      }
+
       :root {
         --cor-fundo: rgb(242, 233, 208);
         --cor-letra: rgb(0, 149, 255);
@@ -52,7 +66,7 @@
       #texto {
         margin: 0;
         color: var(--cor-letra);
-        font-size: clamp(3.5rem, 16vw, 8rem);
+        font-size: clamp(5.25rem, 24vw, 12rem);
         line-height: 0.95;
         letter-spacing: 0.03em;
         text-shadow:
@@ -161,6 +175,6 @@
       </section>
     </main>
 
-    <script src="/app.js"></script>
+    <script src="/static/app.js"></script>
   </body>
 </html>

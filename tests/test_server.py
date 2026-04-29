@@ -14,6 +14,14 @@ def test_index_retorna_html():
     assert resposta.status_code == 200
     assert "text/html" in resposta.headers["content-type"]
     assert 'id="entrada"' in resposta.text
+    assert '/static/ComicNeue-Regular.ttf' in resposta.text
+
+
+def test_static_retorna_fonte():
+    resposta = client.get("/static/ComicNeue-Regular.ttf")
+
+    assert resposta.status_code == 200
+    assert resposta.content
 
 
 def test_audio_retorna_mp3_cacheado(monkeypatch, tmp_path: Path):
